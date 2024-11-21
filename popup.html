@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        width: 350px;
+        padding: 15px;
+        font-family: Arial, sans-serif;
+      }
+      .input-group {
+        margin-bottom: 15px;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+      input {
+        width: calc(100% - 12px);
+        padding: 6px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+      button {
+        width: 100%;
+        padding: 10px;
+        background-color: #2196f3;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      button:hover {
+        background-color: #1976d2;
+      }
+      button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+      #preview-container {
+        margin: 10px 0;
+        padding: 10px;
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+        background-color: #f5f5f5;
+        display: none;
+      }
+      .preview-title {
+        margin: 0 0 8px 0;
+        font-size: 14px;
+        font-weight: bold;
+        color: #333;
+      }
+      .date-item {
+        margin: 5px 0;
+        padding: 5px;
+        background-color: white;
+        border-radius: 3px;
+        font-size: 13px;
+      }
+      .progress-container {
+        margin-top: 15px;
+        display: none;
+      }
+      .progress-bar {
+        width: 100%;
+        height: 20px;
+        background-color: #f0f0f0;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid #ddd;
+      }
+      .progress-fill {
+        height: 100%;
+        background-color: #2196f3;
+        width: 0%;
+        transition: width 0.3s ease;
+      }
+      .success {
+        color: #2e7d32;
+        font-weight: bold;
+        margin-top: 10px;
+        padding: 10px;
+        border: 1px solid #2e7d32;
+        border-radius: 5px;
+        background-color: #e8f5e9;
+      }
+      #result-container {
+        margin-top: 10px;
+      }
+      .success {
+        color: #2e7d32;
+      }
+      .error {
+        color: #c62828;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="input-group">
+      <label for="weeks">예약할 주 수</label>
+      <input type="number" id="weeks" min="1" max="12" value="4" />
+    </div>
+
+    <div id="preview-container">
+      <div class="preview-title">예약 시도할 날짜</div>
+      <div id="preview-dates"></div>
+    </div>
+
+    <button id="startReservation">예약 시작</button>
+
+    <div class="progress-container" id="progressContainer">
+      <div style="margin-bottom: 5px; font-weight: bold; color: #333">
+        진행률: <span id="progressText">0%</span>
+      </div>
+      <div class="progress-bar">
+        <div
+          class="progress-fill"
+          id="progressBar"
+          style="transition: width 0.5s ease"
+        ></div>
+      </div>
+    </div>
+
+    <div id="result-container" style="margin-top: 15px; font-size: 14px">
+      <!-- 예약 상태 로그가 여기에 추가됨 -->
+    </div>
+
+    <div id="result-container"></div>
+    <script src="popup.js"></script>
+  </body>
+</html>
