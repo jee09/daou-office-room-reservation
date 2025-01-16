@@ -101,6 +101,12 @@ document
     const weeks = document.getElementById("weeks").value;
     const progressContainer = document.getElementById("progressContainer");
     const resultContainer = document.getElementById("result-container");
+    const selectedRoom = document.getElementById("roomSelect").value;
+
+    if (!selectedRoom) {
+      alert("회의실을 선택해주세요!");
+      return;
+    }
 
     console.log("예약 시작 버튼 클릭됨");
     console.log(`예약할 주 수: ${weeks}`);
@@ -118,27 +124,24 @@ document
         currentWindow: true,
       });
 
-      // content script 먼저 주입
       await chrome.scripting.executeScript({
         target: { tabId: tab.id },
         files: ["content.js"],
       });
 
-      // 약간의 대기 시간
       await new Promise((resolve) => setTimeout(resolve, 100));
 
-      // makeReservations 함수 실행
       await chrome.scripting.executeScript({
         target: { tabId: tab.id },
-        function: (weeks) => {
-          window.makeReservations(weeks);
+        function: (weeks, roomId) => {
+          window.makeReservations(weeks, roomId);
         },
-        args: [Number(weeks)],
+        args: [Number(weeks), selectedRoom],
       });
     } catch (error) {
       console.error("Error:", error);
-      addLog("오류가 발생했습니다: " + error.message, "error");
       button.disabled = false;
+      button.textContent = "예약 시작";
     } finally {
       button.disabled = false;
     }

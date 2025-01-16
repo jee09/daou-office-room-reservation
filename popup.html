@@ -3,132 +3,235 @@
   <head>
     <meta charset="UTF-8" />
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
       body {
-        width: 350px;
-        padding: 15px;
-        font-family: Arial, sans-serif;
+        width: 400px;
+        padding: 24px;
+        font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui,
+          Roboto, sans-serif;
+        background-color: #f8fafc;
       }
+
+      .container {
+        background: white;
+        padding: 24px;
+        border-radius: 16px;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      }
+
+      .title {
+        font-size: 24px;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 24px;
+        text-align: center;
+      }
+
       .input-group {
-        margin-bottom: 15px;
+        margin-bottom: 20px;
       }
+
       label {
         display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #334155;
+        font-size: 14px;
       }
-      input {
-        width: calc(100% - 12px);
-        padding: 6px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
+
+      .select-input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        background-color: white;
+        font-size: 14px;
+        color: #1e293b;
+        transition: all 0.2s;
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        background-size: 16px;
       }
+
+      .select-input:focus {
+        outline: none;
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      }
+
+      input[type="number"] {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 14px;
+        color: #1e293b;
+        transition: all 0.2s;
+      }
+
+      input[type="number"]:focus {
+        outline: none;
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      }
+
+      #preview-container {
+        margin: 20px 0;
+        padding: 16px;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        background-color: white;
+        display: none;
+      }
+
+      .preview-title {
+        margin-bottom: 12px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #334155;
+      }
+
+      .date-item {
+        margin: 8px 0;
+        padding: 10px;
+        background-color: #f1f5f9;
+        border-radius: 6px;
+        font-size: 14px;
+        color: #475569;
+      }
+
       button {
         width: 100%;
-        padding: 10px;
-        background-color: #2196f3;
+        padding: 14px;
+        background-color: #2563eb;
         color: white;
         border: none;
-        border-radius: 4px;
+        border-radius: 8px;
         cursor: pointer;
-        font-weight: bold;
+        font-weight: 600;
+        font-size: 16px;
+        transition: all 0.2s;
       }
+
       button:hover {
-        background-color: #1976d2;
+        background-color: #1d4ed8;
+        transform: translateY(-1px);
       }
+
       button:disabled {
-        background-color: #ccc;
+        background-color: #94a3b8;
         cursor: not-allowed;
+        transform: none;
       }
-      #preview-container {
-        margin: 10px 0;
-        padding: 10px;
-        border: 1px solid #e0e0e0;
-        border-radius: 4px;
-        background-color: #f5f5f5;
-        display: none;
-      }
-      .preview-title {
-        margin: 0 0 8px 0;
-        font-size: 14px;
-        font-weight: bold;
-        color: #333;
-      }
-      .date-item {
-        margin: 5px 0;
-        padding: 5px;
-        background-color: white;
-        border-radius: 3px;
-        font-size: 13px;
-      }
+
       .progress-container {
-        margin-top: 15px;
+        margin-top: 20px;
         display: none;
       }
+
       .progress-bar {
         width: 100%;
-        height: 20px;
-        background-color: #f0f0f0;
-        border-radius: 10px;
+        height: 10px;
+        background-color: #f1f5f9;
+        border-radius: 999px;
         overflow: hidden;
-        border: 1px solid #ddd;
       }
+
       .progress-fill {
         height: 100%;
-        background-color: #2196f3;
+        background-color: #2563eb;
         width: 0%;
         transition: width 0.3s ease;
       }
+
+      #progressText {
+        font-size: 14px;
+        font-weight: 600;
+        color: #334155;
+        margin-bottom: 8px;
+        display: block;
+      }
+
       .success {
-        color: #2e7d32;
-        font-weight: bold;
-        margin-top: 10px;
-        padding: 10px;
-        border: 1px solid #2e7d32;
-        border-radius: 5px;
-        background-color: #e8f5e9;
+        color: #059669;
+        background-color: #ecfdf5;
+        border: 1px solid #059669;
+        padding: 12px;
+        border-radius: 8px;
+        margin-top: 16px;
+        font-size: 14px;
+        font-weight: 500;
       }
-      #result-container {
-        margin-top: 10px;
-      }
-      .success {
-        color: #2e7d32;
-      }
+
       .error {
-        color: #c62828;
+        color: #dc2626;
+        background-color: #fef2f2;
+        border: 1px solid #dc2626;
+        padding: 12px;
+        border-radius: 8px;
+        margin-top: 16px;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      #result-container {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #475569;
       }
     </style>
   </head>
   <body>
-    <div class="input-group">
-      <label for="weeks">예약할 주 수</label>
-      <input type="number" id="weeks" min="1" max="12" value="4" />
-    </div>
+    <div class="container">
+      <h1 class="title">회의실 예약</h1>
 
-    <div id="preview-container">
-      <div class="preview-title">예약 시도할 날짜</div>
-      <div id="preview-dates"></div>
-    </div>
-
-    <button id="startReservation">예약 시작</button>
-
-    <div class="progress-container" id="progressContainer">
-      <div style="margin-bottom: 5px; font-weight: bold; color: #333">
-        진행률: <span id="progressText">0%</span>
+      <div class="input-group">
+        <label for="roomSelect">회의실 선택</label>
+        <select id="roomSelect" class="select-input">
+          <option value="">회의실을 선택하세요</option>
+          <option value="4140">ICT융합룸 (2층)</option>
+          <option value="4113">화상회의실 (2층)</option>
+          <option value="4098">플랫폼룸 (2층 대회의실)</option>
+          <option value="4211">Purple룸 (5층)</option>
+          <option value="2042">Green룸 (5층)</option>
+          <option value="480">Orange룸 (5층 대회의실)</option>
+          <option value="1041">White룸 (5층)</option>
+          <option value="490">Red룸 (5층)</option>
+          <option value="4683">회의실 (7층)</option>
+        </select>
       </div>
-      <div class="progress-bar">
-        <div
-          class="progress-fill"
-          id="progressBar"
-          style="transition: width 0.5s ease"
-        ></div>
+
+      <div class="input-group">
+        <label for="weeks">예약할 주 수</label>
+        <input type="number" id="weeks" min="1" max="12" value="4" />
+      </div>
+
+      <div id="preview-container">
+        <div class="preview-title">예약 시도할 날짜</div>
+        <div id="preview-dates"></div>
+      </div>
+
+      <button id="startReservation">예약 시작</button>
+
+      <div class="progress-container" id="progressContainer">
+        <span id="progressText">진행률: 0%</span>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressBar"></div>
+        </div>
+      </div>
+
+      <div id="result-container">
+        <!-- 예약 상태 로그가 여기에 추가됨 -->
       </div>
     </div>
 
-    <div id="result-container" style="margin-top: 15px; font-size: 14px">
-      <!-- 예약 상태 로그가 여기에 추가됨 -->
-    </div>
-
-    <div id="result-container"></div>
     <script src="popup.js"></script>
   </body>
 </html>
